@@ -15,7 +15,7 @@
 	<input id="id_x" type="text" name="x" value="<?php if(isset($x)) print($x); ?>" /><br />
 
 	<label for="id_op">Oprocentowanie </label>
-	<input id="id_op" type="text" name="op" value="<?php if(isset($x)) print($operation); ?>" /><br />
+	<input id="id_op" type="text" name="op" value="<?php if(isset($x)) print($oprocentowanie); ?>" /><br />
 	
 	<label for="id_y">Ilość miesięcy </label>
 	<input id="id_y" type="text" name="y" value="<?php if(isset($y)) print($y); ?>" /><br />
