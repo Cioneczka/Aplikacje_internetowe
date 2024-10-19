@@ -10,12 +10,12 @@ require_once dirname(__FILE__).'/../config.php';
 
 $x = $_REQUEST ['x'];
 $y = $_REQUEST ['y'];
-$operation = $_REQUEST ['op'];
+$oprocentowanie = $_REQUEST ['op'];
 
 // 2. walidacja parametrów z przygotowaniem zmiennych dla widoku
 
 // sprawdzenie, czy parametry zostały przekazane
-if ( ! (isset($x) && isset($y) && isset($operation))) {
+if ( ! (isset($x) && isset($y) && isset($oprocentowanie))) {
 	//sytuacja wystąpi kiedy np. kontroler zostanie wywołany bezpośrednio - nie z formularza
 	$messages [] = 'Błędne wywołanie aplikacji. Brak jednego z parametrów.';
 }
@@ -27,7 +27,7 @@ if ( $x == "") {
 if ( $y == "") {
 	$messages [] = 'Nie podano liczby miesięcy';
 }
-if ( $operation == "") {
+if ( $oprocentowanie == "") {
 	$messages [] = 'Nie podano oprocentowania';
 }
 //nie ma sensu walidować dalej gdy brak parametrów
@@ -55,13 +55,13 @@ if (empty ( $messages )) { // gdy brak błędów
 	//konwersja parametrów na int
 	$x = intval($x);
 	$y = intval($y);
-	$operation = floatval($operation);
+	$oprocentowanie = floatval($oprocentowanie);
 	
-	$wartosc_oprocentowania = ($x/$y)*($operation/100);
+	$wartosc_oprocentowania = ($x/$y)*($oprocentowanie/100);
 	$result = ($x/$y) + $wartosc_oprocentowania;
 }
 
 // 4. Wywołanie widoku z przekazaniem zmiennych
-// - zainicjowane zmienne ($messages,$x,$y,$operation,$result)
+// - zainicjowane zmienne ($messages,$x,$y,$oprocentowanie,$result)
 //   będą dostępne w dołączonym skrypcie
 include 'calc_view.php';
