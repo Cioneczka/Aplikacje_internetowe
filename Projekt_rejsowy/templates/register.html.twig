@@ -1,0 +1,38 @@
+{% extends 'schema/base.html.twig' %}
+
+{% block body %}
+{% for message in app.flashes('error') %} <div class="alert alert-danger">{{ message }}</div> {% endfor %}
+<div class="mt-5 position-static">
+    <h1 class="mt-5">Witaj na Kubryku! - dołącz do nas, już dziś!</h1>
+    <p class="lead">Załóż konto, aby móc rezerwować rejsy!</p>
+</div>
+
+    <!-- Sekcja Rejestracji -->
+    <div class="col-md-12 mt-5">
+        <h3>Rejestracja nowego użytkownika</h3>
+        <form action="{{ path('register') }}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Nazwa użytkownika:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Hasło:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Imię:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Nazwisko:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name">
+            </div>
+            <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
