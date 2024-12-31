@@ -1,63 +1,90 @@
 {% extends 'schema/base.html.twig' %}
 
 {% block body %}
-<div class="mt-5 position-static" >
-    <h1 class="mt-5">Witaj na Kubryku! - najlepszej stronie do znajdowania rejsów!</h1>
-    <p class="lead">Zarezerwuj rejs już teraz i ciesz się niezapomnianą podróżą!</p>
-</div>
-    <div class="row">
-        <!-- Sekcja Rezerwacji -->
-        <div class="col-md-6">
-            <h3 style="color:#47B8F5;">Rejsy wycieczkowe</h3>
-            <form>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Region</label>
-                    <select class="form-select" id="destination">
-                        {# tutaj by wypadało zrobić listę co się pobiera z bazy danych Distinct(kraj_docelowy) #}
-                    </select>
-                    {# tutaj by wypadało zrobić listę co się pobiera z bazy danych Distinct(kraj_początkowy) #}
-                   
-                </div>
 
-                <div class="mb-3">
-                    <label for="start_date" class="form-label">Miesiąc startu rejsu</label>
-                    <input type="date" class="form-control" id="start_date" placeholder="Wybierz datę">
-                </div>
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-light text-center">
+    <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
+        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline">Menu</span>
+        </a>
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-center" id="menu">
+                       <li>
+                <a href="#submenuPrice" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline"></span>Cena</a>
+                <ul class="collapse show nav flex-column ms-1" id="submenuPrice" >
+                    <li class="w-100">
+                        <button class="btn btn-light w-100">Do 2500zł</button>
+                    </li>
+                    <li class="w-100">
+                        <button class="btn btn-light w-100">2500-5000zł</button>
+                    </li>
+                    <li class="w-100">
+                        <button class="btn btn-light w-100">5000-8000zł</button>
+                    </li>
+                    <li class="w-100">
+                        <button class="btn btn-light w-100">8000+</button>
+                    </li>
+                </ul>
+            </li>
+           
+            <li>
+                <a href="#submenuDays" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline"></span>Liczba dni</a>
+        <ul class="collapse show nav flex-column ms-1" id="submenuDays" >
+            <li class="w-100">
+                <button class="btn btn-light w-100">Do 6 dni</button>
+            </li>
+            <li class="w-100">
+                <button class="btn btn-light w-100">6-10 dni</button>
+            </li>
+            <li class="w-100">
+                <button class="btn btn-light w-100">10-12 dni</button>
+            </li>
+            <li class="w-100">
+                <button class="btn btn-light w-100">12+ dni</button>
+            </li>
+        </ul>
 
-                <div class="mb-3">
-                    <label for="destination" class="form-label">Cel rejsu</label>
-                    <select class="form-select" id="destination">
-                        {# tutaj by wypadało zrobić listę co się pobiera z bazy danych Distinct(kraj_docelowy) #}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Zarezerwuj</button>
-            </form>
-
-        </div>
+            </li>
 
        
-        <div class="col-md-6">
-            <h3>Dostępne rejsy</h3>
-            <div class="list-group">
-                <div class="list-group-item">
-                    <h5 class="mb-1">Rejs po Morzu Bałtyckim</h5>
-                    <p class="mb-1">Data: 15 lutego 2024</p>
-                    <p class="mb-1">Opis: Niezapomniany rejs po wschodnich wybrzeżach Bałtyku.</p>
-                    <button class="btn btn-info btn-sm">Zarezerwuj</button>
-                </div>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Rejs po Morzu Śródziemnym</h5>
-                    <p class="mb-1">Data: 5 marca 2024</p>
-                    <p class="mb-1">Opis: Idealna przygoda po zachodnich brzegach Morza Śródziemnego.</p>
-                    <button class="btn btn-info btn-sm">Zarezerwuj</button>
-                </div>
-                <div class="list-group-item">
-                    <h5 class="mb-1">Rejs po Oceanie Atlantyckim</h5>
-                    <p class="mb-1">Data: 20 kwietnia 2024</p>
-                    <p class="mb-1">Opis: Ekscytująca podróż przez Atlantyk, pełna nowych przygód!</p>
-                    <button class="btn btn-info btn-sm">Zarezerwuj</button>
-                </div>
-            </div>
-        </div>
     </div>
+</div>
+
+        <div class="col py-3">
+            <div class="mt-5 position-static" >
+                <h1 class="mt-5">Witaj na Kubryku! - najlepszej stronie do znajdowania rejsów!</h1>
+                <p class="lead">Zarezerwuj rejs już teraz i ciesz się niezapomnianą podróżą!</p>
+            </div>
+               
+            
+                   
+                    <div class="col-md-12">
+                        <h3>Dostępne rejsy</h3>
+                       {# templates/cruise_list/index.html.twig #}
+ <h1>Cruise List</h1>
+
+    {% if cruises is empty %}
+        <p>No cruises found.</p>
+    {% else %}
+        <ul class="cruise-list">
+            {% for cruise in cruises %}
+                <li class="cruise-item">
+                    <h2>{{ cruise.StartDate|date('Y-m-d') }}</h2>
+                    <p>{{ cruise.EndDate|date('Y-m-d') }}</p>
+                    <p>Price: {{ cruise.price }} €</p>
+                    <div class="ship-details">
+                        <p>Ship Name: {{ cruise.ship.name }}</p>
+                        <p>Ship Capacity: {{ cruise.ship.capacity }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            
 {% endblock %}

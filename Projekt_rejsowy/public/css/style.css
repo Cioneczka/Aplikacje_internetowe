@@ -54,3 +54,50 @@ h1 {
     background-color: #0056b3;
     border-color: #004085;
 }
+
+
+        /* Stylowanie listy rejsów */
+        .cruise-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cruise-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        /* Naprzemienne kolory tła */
+        .cruise-item:nth-child(odd) {
+            background-color: #a7cfd3; /* Jasny niebieski */
+        }
+
+        .cruise-item:nth-child(even) {
+            background-color: #a9b9c9; /* Jasny różowy */
+        }
+
+        /* Stylowanie nagłówków i paragrafów */
+        .cruise-item h2 {
+            margin-top: 0;
+            color: #00796b; /* Ciemny turkus */
+        }
+
+        .cruise-item p {
+            margin: 5px 0;
+            color: #455a64; /* Ciemny szary */
+        }
+
+        /* Stylowanie nazwy statku i pojemności */
+        .ship-details {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .ship-details p {
+            font-style: italic;
+            color: #607d8b; /* Szaroniebieski */
+        }

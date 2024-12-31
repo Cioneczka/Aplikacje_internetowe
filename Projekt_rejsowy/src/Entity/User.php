@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -23,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 100)]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
@@ -41,42 +42,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $is_active = null;
 
+    #[ORM\OneToMany(mappedBy: 'userid', targetEntity: UserRole::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    private Collection $userRoles;
 
-    private $userRoles;
+    public function __construct()
+    {
+        $this->userRoles = new ArrayCollection();
+    }
 
     public function eraseCredentials()
     {
-        // Jeśli masz jakieś dane wrażliwe przechowywane w obiekcie, usuń je tutaj.
-        // W większości przypadków pozostaw tę metodę pustą.
+
     }
 
     public function getUserIdentifier(): string
     {
-        // Zwracamy unikalny identyfikator użytkownika.
-        // Możesz zmienić to na email, jeśli wolisz.
         return $this->username;
     }
 
     public function getRoles(): array
     {
         $roles = [];
-        foreach ($this->userRoles as $userRole) {
-            $roles[] = $userRole->getRole()->getName();
+
+        if ($this->userRoles !== null && !$this->userRoles->isEmpty()) {
+            foreach ($this->userRoles as $userRole) {
+                if ($userRole->getRole() !== null) {
+                    $roles[] = $userRole->getRole()->getRoleName();
+                } else {
+                    error_log('userRole->getRole() returned null');
+                }
+            }
+        } else {
+            error_log('$this->userRoles is null or empty');
         }
-        return $roles;
+
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
-
         if (!in_array('ROLE_USER', $roles)) {
             $roles[] = 'ROLE_USER';
         }
-    
+
         $this->roles = $roles;
         return $this;
     }
-    
+
+
+
+
 
     public function getId(): ?int
     {

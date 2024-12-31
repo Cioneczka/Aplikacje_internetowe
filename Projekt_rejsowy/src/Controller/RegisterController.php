@@ -58,14 +58,13 @@ class RegisterController extends AbstractController
             $userRole = new UserRole();
             $userRole->setUserid($user);
             $userRole->setRole($role);
-            dump($userRole);
             $entityManager->persist($userRole);
         }
 
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return new Response('Saved new user with id '.$user->getId());
+        return new Response($this->redirectToRoute('login'));
     }
 
    

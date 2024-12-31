@@ -1,0 +1,34 @@
+{% extends 'schema/base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4">Dodaj rejs</h1>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    <div class="mb-3">
+        {{ form_label(form.ship, 'Statek', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.ship, {'attr': {'class': 'form-select'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.start_date, 'Data rozpoczęcia', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.start_date, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.end_date, 'Data zakończenia', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.end_date, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.price, 'Cena', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

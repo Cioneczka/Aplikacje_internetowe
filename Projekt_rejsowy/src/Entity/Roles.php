@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RolesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RolesRepository::class)]
@@ -15,8 +17,14 @@ class Roles
 
     #[ORM\Column(length: 255)]
     private ?string $role_name = null;
-    
-    private $userRoles;
+
+    #[ORM\OneToMany(mappedBy: 'role', targetEntity: UserRole::class)]
+    private Collection $userRoles;
+
+    public function __construct()
+    {
+        $this->userRoles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -33,5 +41,10 @@ class Roles
         $this->role_name = $role_name;
 
         return $this;
+    }
+
+    public function getUserRoles(): Collection
+    {
+        return $this->userRoles;
     }
 }
