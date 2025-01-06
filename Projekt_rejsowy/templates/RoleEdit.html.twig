@@ -1,0 +1,65 @@
+{% extends 'schema/base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        {# Pole tekstowe do wyszukiwania #}
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Wyszukaj użytkownika..." id="searchInput">
+        </div>
+
+        {# Tabela z listą użytkowników #}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Roles</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Przykładowe dane #}
+                <tr>
+                    <td>john_doe</td>
+                    <td>ROLE_USER</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>jane_doe</td>
+                    <td>ROLE_ADMIN</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>test_user</td>
+                    <td>ROLE_MODERATOR</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {# Skrypt do filtrowania tabeli #}
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+            const rows = document.querySelectorAll('table tbody tr');
+
+            rows.forEach(row => {
+                const username = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                if (username.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+{% endblock %}

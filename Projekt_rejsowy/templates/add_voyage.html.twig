@@ -26,6 +26,16 @@
     </div>
 
     <div class="mb-3">
+        {{ form_label(form.destination, 'Wybierz kierunek podróży:', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.destination, {'attr': {'class': 'form-control'}}) }}
+    </div>
+ 
+    <div class="mb-3">
+        {{ form_label(form.start_point, 'Wybierz w jakim kraju rejs się zacznie:', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.start_point, {'attr': {'class': 'form-control'}}) }}
+    </div> 
+
+    <div class="mb-3">
         {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
     </div>
 

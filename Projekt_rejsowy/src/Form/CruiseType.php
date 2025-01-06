@@ -31,6 +31,25 @@ class CruiseType extends AbstractType
             ->add('end_date', DateType::class, [
                 'widget' => 'single_text',
             ])
+            ->add('destination', EntityType::class,[
+                'class' => 'App\Entity\Countries',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $countries){
+                    return $countries->createQueryBuilder('c')
+                    ->orderBy('c.name', 'ASC');
+                },
+                'placeholder' => 'Wybierz kierunek',
+            ])
+            ->add('start_point', EntityType::class,[
+                'class' => 'App\Entity\Countries',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $countries){
+                    return $countries->createQueryBuilder('c')
+                    ->orderBy('c.name', 'ASC');
+                },
+                'placeholder' => 'Wybierz kierunek',
+            ])
+            
             ->add('price', IntegerType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'Dodaj',

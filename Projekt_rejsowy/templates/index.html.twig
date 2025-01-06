@@ -1,90 +1,69 @@
 {% extends 'schema/base.html.twig' %}
 
 {% block body %}
-
     <div class="row flex-nowrap">
         <div class="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-light text-center">
-    <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
-        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline">Menu</span>
-        </a>
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-center" id="menu">
-                       <li>
-                <a href="#submenuPrice" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline"></span>Cena</a>
-                <ul class="collapse show nav flex-column ms-1" id="submenuPrice" >
-                    <li class="w-100">
-                        <button class="btn btn-light w-100">Do 2500zł</button>
-                    </li>
-                    <li class="w-100">
-                        <button class="btn btn-light w-100">2500-5000zł</button>
-                    </li>
-                    <li class="w-100">
-                        <button class="btn btn-light w-100">5000-8000zł</button>
-                    </li>
-                    <li class="w-100">
-                        <button class="btn btn-light w-100">8000+</button>
+            <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-center" id="menu">
+                    <li>
+                        <a href="#submenuFilters" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-filter"></i> <span class="ms-1 d-none d-sm-inline"></span>Filtry
+                        </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenuFilters">
+                            <li class="w-100">
+                        {# auto formulkarz z wyszukiwaniem ogólnym i filtrami wyszukiwania #}
+
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </li>
-           
-            <li>
-                <a href="#submenuDays" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                    <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline"></span>Liczba dni</a>
-        <ul class="collapse show nav flex-column ms-1" id="submenuDays" >
-            <li class="w-100">
-                <button class="btn btn-light w-100">Do 6 dni</button>
-            </li>
-            <li class="w-100">
-                <button class="btn btn-light w-100">6-10 dni</button>
-            </li>
-            <li class="w-100">
-                <button class="btn btn-light w-100">10-12 dni</button>
-            </li>
-            <li class="w-100">
-                <button class="btn btn-light w-100">12+ dni</button>
-            </li>
-        </ul>
-
-            </li>
-
-       
-    </div>
-</div>
+            </div>
+        </div>
 
         <div class="col py-3">
-            <div class="mt-5 position-static" >
+            <div class="mt-5 position-static">
                 <h1 class="mt-5">Witaj na Kubryku! - najlepszej stronie do znajdowania rejsów!</h1>
                 <p class="lead">Zarezerwuj rejs już teraz i ciesz się niezapomnianą podróżą!</p>
             </div>
-               
-            
-                   
-                    <div class="col-md-12">
-                        <h3>Dostępne rejsy</h3>
-                       {# templates/cruise_list/index.html.twig #}
- <h1>Cruise List</h1>
 
-    {% if cruises is empty %}
-        <p>No cruises found.</p>
-    {% else %}
-        <ul class="cruise-list">
-            {% for cruise in cruises %}
-                <li class="cruise-item">
-                    <h2>{{ cruise.StartDate|date('Y-m-d') }}</h2>
-                    <p>{{ cruise.EndDate|date('Y-m-d') }}</p>
-                    <p>Price: {{ cruise.price }} €</p>
-                    <div class="ship-details">
-                        <p>Ship Name: {{ cruise.ship.name }}</p>
-                        <p>Ship Capacity: {{ cruise.ship.capacity }}</p>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+            <div class="col-md-12">
+                <h3>Dostępne rejsy</h3>
+                {% if pager is empty %}
+                    <p>Brak dostępnych rejsów.</p>
+                {% else %}
+                    <div class="cruise-list">
+                        {% for cruise in pager %}
+                            <div class="cruise-item">
+                                {# Miejsce na zdjęcie #}
+                                <div class="cruise-image-placeholder">
+                                    <img src="/images/Cruise-ship-300x200.jpg" alt="Zdjęcie rejsu" class="img-fluid">
+                                </div>
+                                <div class="cruise-details">
+                                    <h2>{{ cruise.StartDate|date('Y-m-d') }} - {{ cruise.EndDate|date('Y-m-d') }}</h2>
+                                    <p><strong>Cena:</strong> {{ cruise.price }} €</p>
+                                    <div class="ship-details">
+                                        <p><strong>Statek:</strong> {{ cruise.ship.name }}</p>
+                                        <p><strong>Pojemność:</strong> {{ cruise.ship.capacity }} osób</p>
+                                        <p><strong>Miejsce wypłynięcia:</strong> {{ cruise.startpoint }}</p>
+                                        <p><strong>Destynacja:</strong> {{ cruise.destination }}</p>
+                                    </div>
+                                </div>
+                                {# Przycisk "Rezerwuj" #}
+                                <div class="cruise-actions">
+                                    <a href="#" class="btn btn-primary">Rezerwacja</a>
                                 </div>
                             </div>
+                        {% endfor %}
                     </div>
-                </div>
-            
+
+                    <div class="pagination">
+                        {{ pagerfanta(pager, 'twitter_bootstrap') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

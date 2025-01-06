@@ -27,6 +27,35 @@ class Cruise
     #[ORM\JoinColumn(nullable: false)]
     private ?Ship $ship = null;
 
+    #[ORM\Column]
+    private ?string $destination = null;
+
+    #[ORM\Column]
+    private ?string $start_point = null;
+    
+
+    public function getDestination(): ?string
+    {
+        return $this->start_point;
+    }
+
+    public function setStartPoint(?string $start_point): ?self
+    {
+        $this->start_point = $start_point;
+        return $this;
+    }
+
+    public function getStartPoint(): ?string
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(?string $destination): ?self
+    {
+        $this->destination = $destination;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

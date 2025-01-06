@@ -57,47 +57,103 @@ h1 {
 
 
         /* Stylowanie listy rejsów */
-        .cruise-list {
-            list-style: none;
-            padding: 0;
-        }
+/* Style dla listy rejsów */
+.cruise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        .cruise-item {
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
-        }
+.cruise-item {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        /* Naprzemienne kolory tła */
-        .cruise-item:nth-child(odd) {
-            background-color: #a7cfd3; /* Jasny niebieski */
-        }
+.cruise-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-        .cruise-item:nth-child(even) {
-            background-color: #a9b9c9; /* Jasny różowy */
-        }
+.cruise-image-placeholder {
+    flex: 0 0 300px; /* Szerokość zdjęcia */
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        /* Stylowanie nagłówków i paragrafów */
-        .cruise-item h2 {
-            margin-top: 0;
-            color: #00796b; /* Ciemny turkus */
-        }
+.cruise-image-placeholder img {
+    width: 100%;
+    height: auto;
+}
 
-        .cruise-item p {
-            margin: 5px 0;
-            color: #455a64; /* Ciemny szary */
-        }
+.cruise-details {
+    flex: 1;
+    padding: 20px;
+}
 
-        /* Stylowanie nazwy statku i pojemności */
-        .ship-details {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #ddd;
-        }
+.cruise-details h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
 
-        .ship-details p {
-            font-style: italic;
-            color: #607d8b; /* Szaroniebieski */
-        }
+.cruise-details p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.ship-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.ship-details p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Style dla paginacji */
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
