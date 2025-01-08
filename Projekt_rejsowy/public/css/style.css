@@ -157,3 +157,7 @@ h1 {
     color: white;
     border-color: #007bff;
 }
+.main_logo {
+    user-select: none; /* Blokuje zaznaczanie obrazka */
+    pointer-events: none; /* Blokuje interakcje z obrazkiem */
+}

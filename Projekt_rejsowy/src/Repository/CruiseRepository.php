@@ -27,6 +27,7 @@ class CruiseRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->leftJoin('c.ship', 's') // 'ship' to nazwa pola w encji Cruise
             ->addSelect('s') // Dodaj statek do wyników zapytania
+            //->orderBy('','ASC')
             ->getQuery()
             ->getResult();
     }

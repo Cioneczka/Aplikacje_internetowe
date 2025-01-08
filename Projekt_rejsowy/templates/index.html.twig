@@ -15,7 +15,9 @@
                         <ul class="collapse show nav flex-column ms-1" id="submenuFilters">
                             <li class="w-100">
                         {# auto formulkarz z wyszukiwaniem ogólnym i filtrami wyszukiwania #}
-
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Wyszukaj rejs..." id="searchInput">
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -66,4 +68,19 @@
             </div>
         </div>
     </div>
+        <script>
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+    const rows = document.querySelectorAll('.cruise-item'); // Zmiana na klasę .cruise-item
+
+    rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase(); // Pobierz cały tekst wiersza
+        if (rowText.includes(searchValue)) {
+            row.style.display = ''; // Pokaż wiersz, jeśli pasuje
+        } else {
+            row.style.display = 'none'; // Ukryj wiersz, jeśli nie pasuje
+        }
+    });
+});
+    </script>
 {% endblock %}

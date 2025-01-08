@@ -7,43 +7,47 @@
             <input type="text" class="form-control" placeholder="Wyszukaj użytkownika..." id="searchInput">
         </div>
 
-        {# Tabela z listą użytkowników #}
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Roles</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {# Przykładowe dane #}
-                <tr>
-                    <td>john_doe</td>
-                    <td>ROLE_USER</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>jane_doe</td>
-                    <td>ROLE_ADMIN</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>test_user</td>
-                    <td>ROLE_MODERATOR</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        {# Sprawdź, czy są użytkownicy #}
+        {% if UserPager is empty %}
+            <p>Brak użytkowników.</p>
+        {% else %}
+            {# Tabela z listą użytkowników #}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {# Iteruj przez użytkowników w UserPager #}
+                    {% for user in UserPager %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                {# Wyświetl role użytkownika #}
+                                {% for role in user.roles %}
+                                    {{ role }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+<form action="{{ path('delete_user', {'id': user.id}) }}" method="POST" style="display: inline;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">Delete</button>
+</form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {# Paginacja #}
+            <div class="pagination">
+                {{ pagerfanta(UserPager) }}
+            </div>
+        {% endif %}
     </div>
 
     {# Skrypt do filtrowania tabeli #}
