@@ -55,7 +55,10 @@
                                 </div>
                                 {# Przycisk "Rezerwuj" #}
                                 <div class="cruise-actions">
-                                    <a href="#" class="btn btn-primary">Rezerwacja</a>
+<form action="{{ path('details_index', {'id': cruise.id}) }}" method="GET" style="display: inline;">
+
+    <button type="submit" class="btn btn-danger">Szczegóły</button>
+</form>
                                 </div>
                             </div>
                         {% endfor %}

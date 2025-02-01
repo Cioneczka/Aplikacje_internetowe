@@ -6,3 +6,14 @@ controllers:
 kernel:
     resource: App\Kernel
     type: attribute
+user_reservations_index:
+    path: /user_reservations/index
+    controller: App\Controller\UserReservationsController::index
+insert_reservation:
+    path: /reservation/insert/{id}
+    controller: App\Controller\ReservationController::insertReservation
+    methods: [POST]
+details_index:
+    path: /details/{id}
+    controller: App\Controller\DetailsController::index
+    methods: GET

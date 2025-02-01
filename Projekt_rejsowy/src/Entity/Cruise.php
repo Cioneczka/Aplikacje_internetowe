@@ -32,11 +32,14 @@ class Cruise
 
     #[ORM\Column]
     private ?string $start_point = null;
+
+    #[ORM\Column]
+    private ?string $description = null;
     
 
     public function getDestination(): ?string
     {
-        return $this->start_point;
+        return $this->destination;
     }
 
     public function setStartPoint(?string $start_point): ?self
@@ -105,6 +108,18 @@ class Cruise
     public function setShip(?Ship $ship): static
     {
         $this->ship = $ship;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?String $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -16,28 +16,23 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    //    /**
-    //     * @return Reservation[] Returns an array of Reservation objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function CruiseDetails($id)
+    {
+        // Tworzymy zapytanie za pomocą QueryBuilder
+        return $this->createQueryBuilder('r') // 'r' to alias dla encji Reservation
+            ->leftJoin('r.cruise', 'c') // Łączymy z encją Cruise (zakładam, że relacja istnieje)
+            ->leftJoin('c.ship', 's') // Łączymy z encją Ship (zakładam, że relacja istnieje)
+            ->leftJoin('c.countryFrom', 'cf') // Łączymy z encją Country (kraj początkowy)
+            ->leftJoin('c.countryTo', 'ct') // Łączymy z encją Country (kraj końcowy)
+            ->addSelect('c', 's', 'cf', 'ct') // Dodajemy encje do wyników zapytania
+            ->andWhere('r.id = :id') // Filtrujemy po id rezerwacji
+            ->setParameter('id', $id) // Ustawiamy parametr :id
+            ->getQuery() // Tworzymy zapytanie
+            ->getOneOrNullResult(); // Pobieramy jeden wynik lub null, jeśli nie znaleziono
+    }
 
-    //    public function findOneBySomeField($value): ?Reservation
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function insertReservation_rep($id){
+
+        return('dziadyga');
+    }
 }

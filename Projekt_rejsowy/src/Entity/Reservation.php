@@ -82,14 +82,15 @@ class Reservation
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUserId(): ?int
     {
-        return $this->user;
+        return $this->userId;
     }
 
-    public function setUser(?User $user): static
+    // Setter dla userId
+    public function setUserId(int $userId): static
     {
-        $this->user = $user;
+        $this->userId = $userId;
 
         return $this;
     }

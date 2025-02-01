@@ -31,7 +31,7 @@ class CruiseListController extends AbstractController
         $pagerfanta = new Pagerfanta($adapter);
 
         // Ustaw stronicowanie
-        $pagerfanta->setMaxPerPage(10); // Liczba wyników na stronę
+        $pagerfanta->setMaxPerPage(20); // Liczba wyników na stronę
         $pagerfanta->setCurrentPage($request->query->getInt('page', 1)); // Bieżąca strona
 
         // Renderuj szablon i przekaż dane

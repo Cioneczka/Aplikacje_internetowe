@@ -10,7 +10,7 @@
     <!-- Sekcja Rejestracji -->
     <div class="col-md-12 mt-5">
         <h3>Rejestracja nowego użytkownika</h3>
-        <form action="{{ path('register') }}" method="post">
+        <form action="{{ path('register') }}" method="post" onsubmit="return validatePassword()">
             <div class="mb-3">
                 <label for="username" class="form-label">Nazwa użytkownika:</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -24,6 +24,10 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3">
+                <label for="confirm_password" class="form-label">Potwierdź hasło:</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="mb-3">
                 <label for="first_name" class="form-label">Imię:</label>
                 <input type="text" class="form-control" id="first_name" name="first_name">
             </div>
@@ -35,4 +39,17 @@
         </form>
     </div>
 </div>
+
+<script>
+    function validatePassword() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+
+        if (password !== confirmPassword) {
+            alert('Błędnie powtórzone hasło!');
+            return false; // Blokuje wysłanie formularza
+        }
+        return true; // Pozwala na wysłanie formularza
+    }
+</script>
 {% endblock %}

@@ -16,12 +16,14 @@ class Status
     #[ORM\Column(length: 100)]
     private ?string $name = null;
 
+    // Relacja z User, zaznaczamy, że User nie może być null
     #[ORM\ManyToOne(inversedBy: 'statuses')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false)] // Użytkownik nie może być null
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statuses')]
-    #[ORM\JoinColumn(nullable: false)]
+    // Relacja z Reservation, z kaskadą persist, by zapisać powiązaną rezerwację
+    #[ORM\ManyToOne(targetEntity: Reservation::class, inversedBy: 'statuses', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)] // Rezerwacja nie może być null
     private ?Reservation $reservation = null;
 
     public function getId(): ?int
