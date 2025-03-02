@@ -74,16 +74,22 @@
         <script>
 document.getElementById('searchInput').addEventListener('input', function() {
     const searchValue = this.value.toLowerCase();
-    const rows = document.querySelectorAll('.cruise-item'); // Zmiana na klasę .cruise-item
 
-    rows.forEach(row => {
-        const rowText = row.textContent.toLowerCase(); // Pobierz cały tekst wiersza
-        if (rowText.includes(searchValue)) {
-            row.style.display = ''; // Pokaż wiersz, jeśli pasuje
-        } else {
-            row.style.display = 'none'; // Ukryj wiersz, jeśli nie pasuje
-        }
-    });
+    fetch(`/search?query=${searchValue}`)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('cruiseList'); // Kontener na wyniki
+            container.innerHTML = ''; // Wyczyść stare wyniki
+
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('cruise-item');
+                div.textContent = item.name; // Przykładowe pole
+                container.appendChild(div);
+            });
+        })
+        .catch(error => console.error('Błąd wyszukiwania:', error));
 });
+
     </script>
 {% endblock %}
