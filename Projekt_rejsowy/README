@@ -1,0 +1,5 @@
+AJAX (implementacja na jednym widoku) znajduje się w pliku templates/index.html.twig - od linii 74
+
+Implementacja stronicowania rezultatów w widoku z wyszukiwaniem (implementacja na jednym widoku) 
+Samo wywołanie stronicowania znajduje się w pliu templates/index.html.twig
+lecz definicja owego stronicowania znajduje się w src/Controller/CruiseListController

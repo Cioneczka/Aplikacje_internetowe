@@ -1,0 +1,214 @@
+.main_logo {
+    width: 100px; /* Przykładowa szerokość */
+    height: auto; /* Wysokość automatycznie dostosowuje się do szerokości */
+    border-radius: 50%;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+h1 {
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.list-unstyled {
+    padding-left: 0;
+}
+
+.bi {
+    margin-right: 10px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+
+        /* Stylowanie listy rejsów */
+/* Style dla listy rejsów */
+.cruise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cruise-item {
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cruise-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cruise-image-placeholder {
+    flex: 0 0 300px; /* Szerokość zdjęcia */
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cruise-image-placeholder img {
+    width: 100%;
+    height: auto;
+}
+
+.cruise-details {
+    flex: 1;
+    padding: 20px;
+}
+
+.cruise-details h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.cruise-details p {
+    margin: 10px 0;
+    color: #555;
+}
+
+.ship-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.ship-details p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Style dla paginacji */
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+.main_logo {
+    user-select: none; /* Blokuje zaznaczanie obrazka */
+    pointer-events: none; /* Blokuje interakcje z obrazkiem */
+}
+.example-wrapper {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    color: #555;
+}
+
+.token {
+    font-family: monospace;
+    font-size: 0.9em;
+    color: #007bff;
+}

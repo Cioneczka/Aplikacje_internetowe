@@ -1,0 +1,95 @@
+{% extends 'schema/base.html.twig' %}
+
+{% block body %}
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-2 col-xl-1 px-sm-2 px-0 bg-light text-center">
+            <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-center" id="menu">
+                    <li>
+                        <a href="#submenuFilters" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-filter"></i> <span class="ms-1 d-none d-sm-inline"></span>Filtry
+                        </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenuFilters">
+                            <li class="w-100">
+                        {# auto formulkarz z wyszukiwaniem ogólnym i filtrami wyszukiwania #}
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Wyszukaj rejs..." id="searchInput">
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col py-3">
+            <div class="mt-5 position-static">
+                <h1 class="mt-5">Witaj na Kubryku! - najlepszej stronie do znajdowania rejsów!</h1>
+                <p class="lead">Zarezerwuj rejs już teraz i ciesz się niezapomnianą podróżą!</p>
+            </div>
+
+            <div class="col-md-12">
+                <h3>Dostępne rejsy</h3>
+                {% if pager is empty %}
+                    <p>Brak dostępnych rejsów.</p>
+                {% else %}
+                    <div class="cruise-list">
+                        {% for cruise in pager %}
+                            <div class="cruise-item">
+                                {# Miejsce na zdjęcie #}
+                                <div class="cruise-image-placeholder">
+                                    <img src="/images/Cruise-ship-300x200.jpg" alt="Zdjęcie rejsu" class="img-fluid">
+                                </div>
+                                <div class="cruise-details">
+                                    <h2>{{ cruise.StartDate|date('Y-m-d') }} - {{ cruise.EndDate|date('Y-m-d') }}</h2>
+                                    <p><strong>Cena:</strong> {{ cruise.price }} €</p>
+                                    <div class="ship-details">
+                                        <p><strong>Statek:</strong> {{ cruise.ship.name }}</p>
+                                        <p><strong>Pojemność:</strong> {{ cruise.ship.capacity }} osób</p>
+                                        <p><strong>Miejsce wypłynięcia:</strong> {{ cruise.startpoint }}</p>
+                                        <p><strong>Destynacja:</strong> {{ cruise.destination }}</p>
+                                    </div>
+                                </div>
+                                {# Przycisk "Rezerwuj" #}
+                                <div class="cruise-actions">
+<form action="{{ path('details_index', {'id': cruise.id}) }}" method="GET" style="display: inline;">
+
+    <button type="submit" class="btn btn-danger">Szczegóły</button>
+</form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="pagination">
+                        {{ pagerfanta(pager, 'twitter_bootstrap') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+        <script>
+document.getElementById('searchInput').addEventListener('input', function() {
+    const searchValue = this.value.toLowerCase();
+
+    fetch(`/search?query=${searchValue}`)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('cruiseList'); // Kontener na wyniki
+            container.innerHTML = ''; // Wyczyść stare wyniki
+
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('cruise-item');
+                div.textContent = item.name; // Przykładowe pole
+                container.appendChild(div);
+            });
+        })
+        .catch(error => console.error('Błąd wyszukiwania:', error));
+});
+
+    </script>
+{% endblock %}

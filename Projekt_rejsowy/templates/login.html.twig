@@ -1,0 +1,27 @@
+{% extends 'schema/base.html.twig' %}
+
+{% block body %}
+<div class="mt-5 position-static">
+    <h1 class="mt-5">Witaj na Kubryku! - Zaloguj się, aby korzystać ze wszystkich funkcji!</h1>
+</div>
+
+<div class="col-md-12 mt-5">
+    <h3>Logowanie</h3>
+    <form action="{{ path('login') }}" method="post">
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Nazwa użytkownika:</label>
+            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username is not null ? last_username : '' }}" required autofocus>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Hasło:</label>
+            <input type="password" class="form-control" id="password" name="_password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+    </form>
+</div>
+{% endblock %}
